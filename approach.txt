@@ -1,0 +1,32 @@
+Components:
+
+App - top-level component
+BucketList - component to display a list of buckets
+CardList - component to display a list of cards within a bucket
+Card - component to display an individual card
+Modal - component to display a modal with an iframe for video playback
+History - component to display the history of played mp3/mp4 links
+State:
+
+buckets - an array of bucket objects, each containing:
+bucket name (string)
+cards (array of card objects)
+modalOpen - a boolean indicating whether the modal is open
+currentCard - the card object currently being displayed in the modal
+history - an array of objects containing:
+card name (string)
+link (string)
+time played (Date object)
+Actions/Functions:
+
+addBucket - adds a new bucket object to the buckets array
+deleteBucket - removes a bucket object from the buckets array
+addCard - adds a new card object to the cards array within a specific bucket
+deleteCard - removes a card object from the cards array within a specific bucket
+editCard - updates the properties of a card object within a specific bucket
+moveCard - moves a card object from one bucket to another
+openModal - sets modalOpen to true and sets currentCard to the selected card object
+closeModal - sets modalOpen to false and clears currentCard
+addToHistory - adds a new object to the history array
+clearHistory - clears the history array
+You can further break down the above actions into smaller helper functions and create separate files for them to keep the code modular and maintainable.
