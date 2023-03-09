@@ -38,8 +38,8 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd,setEdi
   return (
     <div >
       {editElement.title === undefined ? 
-        <form className="ml-36 mt-12 pt-6 w-[50%] border-solid border-2 border-[#00df9a] rounded-xl" onSubmit={handleSubmit}>
-          <label className="text-[#00df9a] ml-14 font-bold text-xl justify-center flex">
+        <form className="bg-[#00df9a] ml-36 mt-12 pt-6 w-[50%] border-solid border-2 border-[#00df9a] rounded-xl" onSubmit={handleSubmit}>
+          <label className="text-black ml-14 font-bold text-xl justify-center flex">
             Title :
             <input className="border-2 mx-2 rounded-md"
               type="text"
@@ -49,7 +49,7 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd,setEdi
             />
           </label>
           <br />
-          <label className="text-[#00df9a] mx-auto font-bold text-xl justify-center flex">
+          <label className="text-black mx-auto font-bold text-xl justify-center flex">
             Media Link:
             <input className="border-2 mx-2 rounded-md"
               type="text"
@@ -60,7 +60,7 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd,setEdi
           </label>
           <br />
 
-          <label className="text-[#00df9a] ml-12 font-bold text-xl flex">
+          <label className="text-black ml-12 font-bold text-xl flex">
             Select a Bucket:
             <select className="border-2 mx-2 rounded-md" name="bucketName" value={cardData.bucketName} onChange={handleChange}>
               <option value="" >---Select---</option>
@@ -71,13 +71,13 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd,setEdi
             </select>
           </label>
           
-          <button className="text-[#00df9a] my-8 px-3 py-1 ml-[40%] font-bold text-xl  border-2 rounded-md hover:bg-[#00df9a] hover:text-black" type="submit">
+          <button className="text-white my-8 px-3 py-1 ml-[40%] font-bold text-xl  border-2 rounded-md bg-black hover:text-[#00df9a] " type="submit">
             Submit
           </button>
         </form> :
         <div>
-          <form className="ml-36 mt-12 pt-6 w-[50%] border-solid border-2 border-[#00df9a] rounded-xl" onSubmit={handleSubmit}>
-          <label className="text-[#00df9a] ml-14 font-bold text-xl justify-center flex">
+        <form className="bg-[#00df9a] ml-36 mt-12 pt-6 w-[50%] border-solid border-2 border-[#00df9a] rounded-xl" onSubmit={handleSubmit}>
+          <label className="text-black ml-14 font-bold text-xl justify-center flex">
             Title :
             <input className="border-2 mx-2 rounded-md"
               type="text"
@@ -87,7 +87,7 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd,setEdi
             />
           </label>
           <br />
-          <label className="text-[#00df9a] mx-auto font-bold text-xl justify-center flex">
+          <label className="text-black mx-auto font-bold text-xl justify-center flex">
             Media Link:
             <input className="border-2 mx-2 rounded-md"
               type="text"
@@ -98,10 +98,10 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd,setEdi
           </label>
           <br />
 
-          <label className="text-[#00df9a] ml-12 font-bold text-xl flex">
+          <label className="text-black ml-12 font-bold text-xl flex">
             Select a Bucket:
             <select className="border-2 mx-2 rounded-md" name="bucketName" value={cardData.bucketName} onChange={handleChange}>
-              <option className="" value="">--Select--</option>
+              <option value="" >---Select---</option>
               {bucketNames.map(name => 
               {
               return <option value = {name}>{name}</option>
@@ -109,7 +109,7 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd,setEdi
             </select>
           </label>
           
-          <button type="submit" className="text-[#00df9a] my-8 px-3 py-1 ml-[40%] font-bold text-xl  border-2 rounded-md hover:bg-[#00df9a] hover:text-black" >
+          <button className="text-white my-8 px-3 py-1 ml-[40%] font-bold text-xl  border-2 rounded-md bg-black hover:text-[#00df9a] " type="submit">
             Edit
           </button>
         </form>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import BucketList from './components/BucketList'
 import Card from './components/Card'
 import CardList from './components/CardList'
@@ -9,19 +9,34 @@ const App = () => {
 
   const [bucketMembers, setBucketMembers] = useState([
     {
-      title: "This is a title",
+      title: "Video 1",
       mediaLink : "https://www.youtube.com/embed/dQw4w9WgXcQ",
       bucketName : "Educational"
     },
     {
-      title: "This is 2nd video",
+      title: "Video 2",
       mediaLink : "https://www.youtube.com/embed/dQw4w9WgXcQ",
       bucketName : "Educational"
     },
     {
-      title: "This is 3rd video",
+      title: "Video 3 ",
       mediaLink : "https://www.youtube.com/embed/dQw4w9WgXcQ",
       bucketName : "Motivational"
+    },
+    {
+      title: "Video 3 ",
+      mediaLink : "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      bucketName : "Motivational"
+    },
+    {
+      title: "Video 3 ",
+      mediaLink : "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      bucketName : "Vlogs"
+    },
+    {
+      title: "Video 3 ",
+      mediaLink : "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      bucketName : "Vlogs"
     }
   ]);
   
@@ -32,6 +47,7 @@ const App = () => {
   const [editElement, setEditElement] = useState({});
 
   const [activeBucket, setActiveBucket] = useState("Educational");
+  const [filteredBuckets, setFilteredBuckets] = useState([]);
 
   function addCard(cardData) {
     setBucketMembers(prevBucketMembers => {
@@ -81,15 +97,21 @@ const App = () => {
     })
   }
   
-  
+  useEffect(() => {
+    console.log(activeBucket)
+    const newData = bucketMembers.filter(item => item.bucketName === activeBucket);
+    setFilteredBuckets(newData);
+  }, [bucketMembers,activeBucket]);
+
+
   return (
-    <div className='flex flex-col-2 '>
+    <div className='bg-black text-white flex flex-col-2 h-full'>
       
       <div className='w-1/3'>
         <History history = {history}/>
       </div>
 
-      <div className='w-2/3'>
+      <div className='w-2/3 pt-10'>
       <Card
           onAdd = {addCard}
           submitButton = {submitButton}
@@ -100,34 +122,24 @@ const App = () => {
         />
 
         <BucketList bucketMembers ={bucketMembers}
-                    setActiveBucket = {setActiveBucket}
                     newBucketAdded = {newBucketAdded}
+                    setActiveBucket = {setActiveBucket}
+                    activeBucket = {activeBucket}
         />
-
-{/*     {bucketMembers.map((member,id) => {
-          member.bucketName === activeBucket ? 
-            <CardList 
-              key = {id}
-              id = {id}
-              title={member.title}
-              mediaLink ={member.mediaLink} 
-              deleteCard={deleteCard}
-              editCard = {editCard}
-              addHistory = {addHistory}
-            /> : null                                 // Issue
-        })} */}
-
-          
-        {bucketMembers.map((member,id) => {          
-          return  <CardList 
-              key = {id}
-              id = {id}
-              title={member.title}
-              mediaLink ={member.mediaLink} 
-              deleteCard={deleteCard}
-              editCard = {editCard}
-              addHistory = {addHistory}
-            />                                 
+       
+        {filteredBuckets.map((member,id) => {          
+          return <div className='flex'>
+                    <CardList 
+                        key = {id}
+                        id = {id}
+                        title={member.title}
+                        mediaLink ={member.mediaLink} 
+                        bucketName = {member.bucketName}
+                        deleteCard={deleteCard}
+                        editCard = {editCard}
+                        addHistory = {addHistory}
+                      />                                 
+                  </div>
         })}
       </div>
 
