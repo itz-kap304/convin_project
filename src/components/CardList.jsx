@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
 
-const CardList = (props) => {
+const CardList = ({id, title, mediaLink, deleteCard, editCard, addHistory, activeBucket}) => {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleCardClick = () => {
         setIsModalOpen(true);
-        props.addHistory(props.id)
-        console.log("This is running")
+        addHistory(id)
     };
 
     const handleCloseModal = () => {
@@ -17,20 +16,20 @@ const CardList = (props) => {
 
 
     function handleDelete() {
-        props.deleteCard(props.id)
+        deleteCard(id)
     }
 
     function handleEdit(){
-        props.editCard(props.id)
+        editCard(id)
     }
 
     return (
-    <div>
-        <div onClick={handleCardClick}>
-                <p>{props.title}</p>
+    <div className='w-[90%] border-2 '>
+        <div className='' onClick={handleCardClick}>
+                <p className=''>{title}</p>
                 {isModalOpen && (
                     <div>
-                    <iframe width="420" height="315" src={props.mediaLink} title="video player" allowFullScreen></iframe>
+                    <iframe width="420" height="315" src={mediaLink} title="video player" allowFullScreen></iframe>
                     
                     </div>
                 )}

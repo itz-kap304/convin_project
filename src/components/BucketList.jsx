@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 
-const BucketList = ({bucketMembers}) => {
+const BucketList = ({bucketMembers,newBucketAdded}) => {
     
     let uniqueBucketNames = [...new Set(bucketMembers.map(item => item.bucketName))];
     const [bucketTypes, setBucketTypes] = useState(uniqueBucketNames);
@@ -19,20 +19,24 @@ const BucketList = ({bucketMembers}) => {
 
     function addBucket(){
         setBucketTypes([...bucketTypes,newBucketName]);
+        newBucketAdded(newBucketName);
         setAddClicked(false);
         setNewBucketName("");
     }
 
   return (
     <div>
-        <p>Bucket Items:</p>
+        <p className='pt-12 text-xl font-bold'>Buckets :</p>
         {bucketTypes.map(member => {
-            return <p>{member}</p>
+            return <div className='flex ...'>
+                        <p className='flex-1 ...'>{member}</p>
+                    </div>
+                
         })}
 
         {addClicked ? 
             <div> 
-            <label>
+            <label >
             Bucket Name:
             <input type="text" name="newBucketName" value={newBucketName} onChange={handleBucketName}/>
             <button onClick={addBucket}>Add Bucket</button>

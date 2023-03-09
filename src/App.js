@@ -25,13 +25,13 @@ const App = () => {
     }
   ]);
   
-  const [bucketNames, setbucketNames] = useState(["Educational","Motivational","Vlogs"]);
+  const [bucketNames, setbucketNames] = useState(["Educational","Motivational"]);
   const [history, setHistory] = useState([]);
 
   const [submitButton, setSubmitButton] = useState(true);
   const [editElement, setEditElement] = useState({});
 
-
+  const [activeBucket, setActiveBucket] = useState("Educational");
 
   function addCard(cardData) {
     setBucketMembers(prevBucketMembers => {
@@ -50,14 +50,14 @@ const App = () => {
   function editCard(id) {
       console.log("Edit triggered for id: ",id)
       setSubmitButton(!submitButton);
-      // let triggeredCard = bucketMembers.find((elem,index) => {
-      //     return index === id
-      // });
-
-      // const newObject = {...editElement, title:triggeredCard.title,
-      //   mediaLink : triggeredCard.mediaLink}
-
-      // setEditElement(newObject);
+      let triggeredCard = bucketMembers.find((elem,index) => {
+          return index === id
+      });
+      
+      const newObject = {...editElement, title:triggeredCard.title,
+        mediaLink : triggeredCard.mediaLink,
+        bucketName : triggeredCard.bucketName}
+      setEditElement(newObject);
   }
 
   function addHistory(id){
@@ -75,10 +75,22 @@ const App = () => {
     })
   }
 
-
+  function newBucketAdded(bucketName){
+    setbucketNames(prevBuckets => {
+      return [...prevBuckets,bucketName];
+    })
+  }
+  
+  
   return (
-    <div>
-        <Card
+    <div className='flex flex-col-2 '>
+      
+      <div className='w-1/3'>
+        <History history = {history}/>
+      </div>
+
+      <div className='w-2/3'>
+      <Card
           onAdd = {addCard}
           submitButton = {submitButton}
           setSubmitButton = {setSubmitButton}
@@ -86,21 +98,38 @@ const App = () => {
           bucketNames = {bucketNames}
         />
 
-        <BucketList bucketMembers ={bucketMembers}/>
+        <BucketList bucketMembers ={bucketMembers}
+                    setActiveBucket = {setActiveBucket}
+                    newBucketAdded = {newBucketAdded}
+        />
 
-        {bucketMembers.map((member,id) => {
-          return <CardList 
-                    key = {id}
-                    id = {id}
-                    title={member.title}
-                    mediaLink ={member.mediaLink} 
-                    deleteCard={deleteCard}
-                    editCard = {editCard}
-                    addHistory = {addHistory}
-                  />
+{/*     {bucketMembers.map((member,id) => {
+          member.bucketName === activeBucket ? 
+            <CardList 
+              key = {id}
+              id = {id}
+              title={member.title}
+              mediaLink ={member.mediaLink} 
+              deleteCard={deleteCard}
+              editCard = {editCard}
+              addHistory = {addHistory}
+            /> : null                                 // Issue
+        })} */}
+
+          
+        {bucketMembers.map((member,id) => {          
+          return  <CardList 
+              key = {id}
+              id = {id}
+              title={member.title}
+              mediaLink ={member.mediaLink} 
+              deleteCard={deleteCard}
+              editCard = {editCard}
+              addHistory = {addHistory}
+            />                                 
         })}
+      </div>
 
-        <History history = {history}/>
         
 
 
