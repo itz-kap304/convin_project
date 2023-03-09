@@ -25,8 +25,8 @@ const CardList = ({id, title, mediaLink, deleteCard, editCard, addHistory, activ
 
     return (
     <div className='w-[90%] border-2 '>
-        <div className='' onClick={handleCardClick}>
-                <p className=''>{title}</p>
+        <div className='' >
+                <p className='' onClick={handleCardClick}>{title}</p>
                 {isModalOpen && (
                     <div>
                     <iframe width="420" height="315" src={mediaLink} title="video player" allowFullScreen></iframe>

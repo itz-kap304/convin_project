@@ -53,7 +53,7 @@ const App = () => {
       let triggeredCard = bucketMembers.find((elem,index) => {
           return index === id
       });
-      
+      deleteCard(id);
       const newObject = {...editElement, title:triggeredCard.title,
         mediaLink : triggeredCard.mediaLink,
         bucketName : triggeredCard.bucketName}
@@ -96,6 +96,7 @@ const App = () => {
           setSubmitButton = {setSubmitButton}
           editElement = {editElement}
           bucketNames = {bucketNames}
+          setEditElement = {setEditElement}
         />
 
         <BucketList bucketMembers ={bucketMembers}

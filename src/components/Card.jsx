@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd}) {
+function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd,setEditElement}) {
   
   const [cardData, setcardData] = useState({
     title : "",
@@ -20,19 +20,20 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     onAdd(cardData);
-    setcardData({title : "",mediaLink:""})
+    setcardData({title : "",mediaLink:"", bucketName:""})
+    setEditElement({});
   };
 
-  function editCardDetails() {
-    console.log("Edit Clicked")
+  useEffect(() => {
     setcardData(prevDetails => {
       return {...prevDetails, title : editElement.title,
          mediaLink : editElement.mediaLink,
          bucketName : editElement.bucketName
       }
     })
-    console.log("Card Data : ",cardData)
-  }
+    
+  }, [editElement])
+
 
   return (
     <div >
@@ -75,7 +76,6 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd}) {
           </button>
         </form> :
         <div>
-          {editCardDetails}
           <form className="ml-36 mt-12 pt-6 w-[50%] border-solid border-2 border-[#00df9a] rounded-xl" onSubmit={handleSubmit}>
           <label className="text-[#00df9a] ml-14 font-bold text-xl justify-center flex">
             Title :
@@ -109,7 +109,9 @@ function Card({submitButton,setSubmitButton,editElement,bucketNames,onAdd}) {
             </select>
           </label>
           
-          <button className="text-[#00df9a] my-8 px-3 py-1 ml-[40%] font-bold text-xl  border-2 rounded-md hover:bg-[#00df9a] hover:text-black" type="submit">Edit</button>
+          <button type="submit" className="text-[#00df9a] my-8 px-3 py-1 ml-[40%] font-bold text-xl  border-2 rounded-md hover:bg-[#00df9a] hover:text-black" >
+            Edit
+          </button>
         </form>
         </div>
 
